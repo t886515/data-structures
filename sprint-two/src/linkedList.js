@@ -1,53 +1,51 @@
-var LinkedList = function() {
+var LinkedList = function() { //O(log n)
   var list = {};
   list.head = null;
   list.tail = null;
 
-  list.addToTail = function(value) {
-    var newNode = Node(value);
-    if (list.head === null) {
-      list.head = newNode;
-    } else {
-      function recursion(obj, nextVal) {
-        if (nextVal === null) {
-          obj.next = newNode;
-        } else if (nextVal) {
-          recursion(nextVal, nextVal.next);
-        }
-      }
-      recursion(list.head, list.head.next);
-    }
+  list.addToTail = function(value) { //O(1)
+
     //don't need a recursion right here - use tail instead - think about it!
-    list.tail = newNode;
     //1) create a node
+    var node = Node(value);
     //2) check if head === null - refer the list.head to the new node just created
-    //3) refer the list.tail to the new node
-    //4) if there's a previous node - link the previous's node's next to the current node
-  };
-
-  list.removeHead = function() {
-    var preVal = list.head.value;
-    list.head = list.head.next;
-    return preVal;
-  };
-
-  list.contains = function(target) {
-    function recursingAgain(obj) {
-      if (obj.value === target) {
-        return true;
-      } else if (obj.next === null) {
-        return false;
-      } else {
-        return recursingAgain(obj.next);
-      }
+    if(list.head === null){
+      list.head = node; 
+    } else {
+      //3) refer the list.tail to the new node
+      list.tail.next = node; 
     }
-    return recursingAgain(list.head);
+    //4) if there's a previous node - link the previous's node's next to the current node
+    list.tail = node;
+  };
+
+  list.removeHead = function() { //O(1)
+    var prevHead = list.head;
+    list.head = list.head.next; 
+    return prevHead.value; 
+  };
+
+  list.contains = function(target) { //O(log n)
+   //check if target = node.value 
+   var recursion = function(nodeObj){
+    if (nodeObj.value === target){
+      return true; 
+    } else if (nodeObj === list.tail){
+      return false; 
+    }
+    
+    return recursion(nodeObj.next);
+    
+   };
+   
+   return recursion(list.head);
+   
   };
 
   return list;
 };
 
-var Node = function(value) {
+var Node = function(value) { //O(1)
   var node = {};
 
   node.value = value;
