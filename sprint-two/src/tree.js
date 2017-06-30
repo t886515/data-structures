@@ -1,4 +1,4 @@
-var Tree = function(value) { //O(n^2)
+var Tree = function(value) { //O(1)
   var newTree = {};
   newTree.value = value;
 
