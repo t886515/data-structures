@@ -36,4 +36,11 @@ describe('binarySearchTree', function() {
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5, 2, 3]);
   });
+  
+  it('should have left child value less than the parent value', function() {
+    binarySearchTree.insert(4);
+    binarySearchTree.insert(9);
+    binarySearchTree.insert(2);
+    expect(binarySearchTree.left.value < binarySearchTree.value).to.equal(true);
+  });
 });

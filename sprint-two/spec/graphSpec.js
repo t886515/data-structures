@@ -68,4 +68,13 @@ describe('graph', function() {
     expect(graph.hasEdge(3, 5)).to.equal(true);
     expect(graph.hasEdge(5, 5)).to.equal(true);
   });
+  
+  it('should only establish edge when both nodes exist', function(){
+    graph.addNode(4);
+    graph.addNode(6);
+    graph.addEdge(5, 4);  
+    
+    expect(graph.hasEdge(5, 4)).to.equal(false);  
+  });
+  
 });
